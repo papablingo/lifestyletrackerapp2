@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.myapplication.R
+import com.example.myapplication.navigation.ScreensNav
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 // welcome screen. First screen users see
@@ -46,6 +48,15 @@ fun WelcomeScreen(navController: NavHostController) {
                 .offset(y = 150.dp)
         ) {
             Text(text = stringResource(id = R.string.LoginText))
+        }
+
+        Button (
+            // navigation to the create account screen
+            onClick = {navController.navigate(ScreensNav.Create.route) },
+            modifier = Modifier
+                .offset(y = 200.dp)
+        ) {
+            Text(text = stringResource(id = R.string.createAccountText))
         }
     }
 }

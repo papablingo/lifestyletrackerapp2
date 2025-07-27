@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.screens
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.myapplication.R
+import com.example.myapplication.repository.UserAuthenticator
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 // Email and password input fields: Allows users to input their emails and passwords
@@ -101,7 +103,13 @@ fun LoginScreen(navController: NavHostController) {
         Button (
             onClick = {
                 Log.i("LOGIN:","email: " + email.value + "\npassword: " + password.value)
-                navController.navigate(ScreensNav.Welcome.route)
+                val u = UserAuthenticator()
+                u.login(
+                    email.value, password.value, onComplete = { b: Boolean, s: String? ->
+                        Log.i("LOGIN: ", s.toString())
+                    }
+                )
+
                       },
             modifier = Modifier
                 .align(Alignment.Center)
@@ -112,6 +120,7 @@ fun LoginScreen(navController: NavHostController) {
         }
     }
 }
+
 
 // Username text field
 @Composable
